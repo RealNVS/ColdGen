@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ColdGen - Smart Message Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        :root {
+            --bg: #0e1117;
+            --panel: rgba(255, 255, 255, 0.94);
+            --text: #131720;
+            --muted: #667085;
+            --line: #d7deea;
+            --accent: #b8892d;
+            --accent-dark: #8f681e;
+            --accent-ink: #17120a;
+            --danger: #b42318;
+            --success: #087443;
+            --navy: #121b2f;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background:
+                linear-gradient(135deg, rgba(14, 17, 23, 0.96), rgba(23, 32, 52, 0.88)),
+                url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80') center/cover fixed;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container {
+            background: var(--panel);
+            padding: 0;
+            border: 1px solid rgba(255, 255, 255, 0.34);
+            border-radius: 18px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
+            width: 100%;
+            max-width: 620px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+        }
+
+        .brand-panel {
+            background: linear-gradient(135deg, #111827, #19253d);
+            color: #fff;
+            padding: 28px 32px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 14px;
+            color: #dfc48a;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.11em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 4px rgba(184, 137, 45, 0.18);
+        }
+
+        .form-panel {
+            padding: 30px 32px 32px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            line-height: 1.2;
+            margin: 0 0 6px;
+            color: #fff;
+            letter-spacing: 0;
+        }
+
+        .subtitle {
+            margin: 0;
+            color: #b9c2d0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        label {
+            display: block;
+            margin-top: 16px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.92rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: #fbfcfe;
+            color: var(--text);
+            font-size: 0.96rem;
+            transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--accent);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(184, 137, 45, 0.17);
+            outline: none;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        button {
+            flex: 1;
+            padding: 14px 16px;
+            background-color: var(--accent);
+            color: var(--accent-ink);
+            font-weight: 900;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.98rem;
+            box-shadow: 0 12px 26px rgba(184, 137, 45, 0.28);
+            transition: background-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        button:hover {
+            background-color: #d2a044;
+            transform: translateY(-1px);
+            box-shadow: 0 16px 34px rgba(184, 137, 45, 0.34);
+        }
+
+        .error {
+            margin-top: 18px;
+            color: var(--danger);
+            background: #fff4f2;
+            border: 1px solid #ffd7d2;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-weight: 500;
+            font-size: 0.92rem;
+        }
+
+        .status {
+            margin-top: 12px;
+            color: var(--success);
+            background: #effaf5;
+            border: 1px solid #bfe8d1;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 16px;
+            }
+
+            .container {
+                border-radius: 14px;
+            }
+
+            .brand-panel,
+            .form-panel {
+                padding: 22px;
+            }
+
+            h1 {
+                font-size: 1.55rem;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="brand-panel">
+            <p class="eyebrow">ColdGen Studio</p>
+            <h1>Smart outreach, matched to your portfolio.</h1>
+            <p class="subtitle">Paste a relevant job link and compare polished response options built from your project history.</p>
+        </div>
+
+        <form class="form-panel" method="POST">
+            <label for="username">Your Name</label>
+            <input id="username" type="text" name="username" placeholder="e.g. Deepika" required>
+
+            <label for="job_url">Job URL</label>
+            <input id="job_url" type="text" name="job_url" placeholder="Paste job listing URL..." required>
+
+            <label for="message_type">Message Type</label>
+            <select id="message_type" name="message_type">
+                <option value="cold_email">Cold Email</option>
+                <option value="linkedin_message">LinkedIn Message</option>
+                <option value="referral_request">Referral Request</option>
+            </select>
+
+            <label for="tone">Tone</label>
+            <select id="tone" name="tone">
+                <option value="formal">Formal</option>
+                <option value="casual">Casual</option>
+                <option value="professional">Professional</option>
+                <option value="friendly">Friendly</option>
+            </select>
+
+            <div class="button-row">
+                <button type="submit" name="generate">Generate</button>
+            </div>
+        </form>
+
+        {% if error %}
+        <div class="error">Warning: {{ error }}</div>
+        {% endif %}
+
+        {% if jobs_found > 0 %}
+        <div class="status">{{ jobs_found }} job{{ 's' if jobs_found > 1 else '' }} found.</div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

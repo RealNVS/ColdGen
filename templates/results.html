@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ColdGen - Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        :root {
+            --bg: #0e1117;
+            --panel: #ffffff;
+            --text: #151a24;
+            --muted: #667085;
+            --line: #d8dfeb;
+            --soft-line: #edf1f6;
+            --accent: #b8892d;
+            --accent-dark: #8f681e;
+            --accent-ink: #17120a;
+            --copy: #143b6f;
+            --copy-dark: #0f2c55;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background:
+                linear-gradient(135deg, rgba(14, 17, 23, 0.98), rgba(23, 32, 52, 0.93)),
+                url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80') center/cover fixed;
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .page {
+            width: min(1180px, calc(100% - 36px));
+            margin: 0 auto;
+            padding: 34px 0 42px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 24px 58px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(12px);
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 12px;
+            color: #dfc48a;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.11em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 4px rgba(184, 137, 45, 0.18);
+        }
+
+        h1 {
+            margin: 0 0 6px;
+            font-size: 2rem;
+            line-height: 1.2;
+            color: #fff;
+            letter-spacing: 0;
+        }
+
+        .meta {
+            margin: 0;
+            color: #b9c2d0;
+            font-size: 0.95rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        button, .link-button {
+            border: none;
+            border-radius: 8px;
+            padding: 11px 15px;
+            font-weight: 850;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.92rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+        }
+
+        .primary {
+            background: var(--accent);
+            color: var(--accent-ink);
+            box-shadow: 0 12px 26px rgba(184, 137, 45, 0.24);
+        }
+
+        .primary:hover {
+            background: #d2a044;
+            transform: translateY(-1px);
+        }
+
+        .secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+        }
+
+        .secondary:hover {
+            border-color: rgba(255, 255, 255, 0.42);
+            transform: translateY(-1px);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            box-shadow: 0 26px 58px rgba(0, 0, 0, 0.22);
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 520px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 18px 18px 15px;
+            border-bottom: 1px solid var(--soft-line);
+            background: linear-gradient(180deg, #ffffff, #f8fafc);
+        }
+
+        .card h2 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        .response {
+            white-space: pre-wrap;
+            line-height: 1.55;
+            font-size: 0.95rem;
+            flex: 1;
+            background: #ffffff;
+            border: none;
+            border-radius: 0;
+            padding: 18px;
+            overflow-wrap: anywhere;
+        }
+
+        .copy {
+            margin: 0 18px 18px;
+            background: var(--copy);
+            color: #fff;
+        }
+
+        .copy:hover {
+            background: var(--copy-dark);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .actions {
+                justify-content: flex-start;
+            }
+
+            .card {
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .page {
+                width: min(100% - 24px, 1180px);
+                padding: 22px 0;
+            }
+
+            h1 {
+                font-size: 1.45rem;
+            }
+
+            .actions {
+                width: 100%;
+            }
+
+            .actions form,
+            .actions button,
+            .actions .link-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <div class="topbar">
+            <div>
+                <p class="eyebrow">ColdGen Studio</p>
+                <h1>Choose a Response</h1>
+                <p class="meta">
+                    {{ job.role }}{% if tone %} - {{ tone|title }}{% endif %}
+                </p>
+            </div>
+            <div class="actions">
+                <form method="POST">
+                    <button class="primary" type="submit">Regenerate All</button>
+                </form>
+                <a class="link-button secondary" href="{{ url_for('index') }}">New Message</a>
+            </div>
+        </div>
+
+        <section class="grid">
+            {% for response in responses %}
+            <article class="card">
+                <div class="card-header">
+                    <h2>{{ response.title }}</h2>
+                </div>
+                <div class="response" id="response-{{ loop.index }}">{{ response.content }}</div>
+                <button class="copy" type="button" onclick="copyResponse('response-{{ loop.index }}')">
+                    Copy This Version
+                </button>
+            </article>
+            {% endfor %}
+        </section>
+    </main>
+
+    <script>
+        function copyResponse(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Response copied to clipboard!");
+            }).catch(() => {
+                alert("Failed to copy response.");
+            });
+        }
+    </script>
+</body>
+</html>
